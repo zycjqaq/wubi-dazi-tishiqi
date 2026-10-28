@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>五笔打字提示器 · 电脑先行版</title>
+<link rel="stylesheet" href="assets/app.css">
+<script>
+/* 资源包注册器：资源脚本只需调用 window.register* 注册，主程序统一解析 */
+window.__packs = { wubi: [], english: [], englishFix: [], chineseEn: [], common: [], articles: [] };
+window.registerWubiPack        = function (p) { window.__packs.wubi.push(p); };
+window.registerEnglishPack     = function (p) { window.__packs.english.push(p); };
+window.registerEnglishFix      = function (p) { window.__packs.englishFix.push(p); };
+window.registerChineseEnPack   = function (p) { window.__packs.chineseEn.push(p); };
+window.registerCommonChars     = function (p) { window.__packs.common.push(p); };
+window.registerArticles        = function (p) { window.__packs.articles.push(p); };
+
+/* 运行期错误兜底：出错时直接显示在页面上，方便离线排查 */
+window.__errors = [];
+window.addEventListener('error', function (e) {
+  var msg = (e && (e.message || (e.error && e.error.message))) || '未知错误';
+  var where = e && e.filename ? (e.filename.split('/').pop() + ':' + e.lineno) : '';
+  window.__errors.push(msg + (where ? ' @ ' + where : ''));
+  var box = document.getElementById('errorBox');
+  if (box) { box.hidden = false; box.textContent = '脚本错误：' + window.__errors.join(' | '); }
+});
+
+</script>
+</head>
+<body>
+<div id="errorBox" hidden style="margin:12px;padding:12px 14px;border-radius:10px;background:#fdeaea;border:1px solid #f7d4d4;color:#a02222;font:13px/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap"></div>
+<div class="app">
+
+  <header class="app-head">
+    <div class="brand">
+      <div class="logo">五</div>
+      <div>
+        <h1>五笔打字提示器</h1>
+        <p class="sub">上面输入 · 下面输出 · 汉字上方给五笔字母 · 英文自动翻译 · 千字十篇练习</p>
+      </div>
+    </div>
+    <div class="pack-info" id="packInfo"></div>
+  </header>
+
+  <main class="stage">
+
+    <!-- ===== 上方面板 ===== -->
+    <section class="panel panel-top">
+      <!-- 日常模式：输入 -->
+      <div class="pane" id="paneInput">
+        <div class="pane-head">
+          <span class="pane-title">输入</span>
+          <span class="pane-tip">汉字 / 英文 / 其他语言</span>
+        </div>
+        <textarea class="input-area" id="srcInput" spellcheck="false"
+          placeholder="在这里输入：汉字会原样输出并在上方标注五笔字母，英文会翻译成中文，其他语言原样输出并提示无法理解……"></textarea>
+      </div>
+
+      <!-- 练习模式：文章 -->
+      <div class="pane" id="paneArticle" hidden>
+        <div class="pane-head">
+          <span class="pane-title">文章</span>
+          <span class="pane-tip" id="articleMeta"></span>
+        </div>
+        <div class="article-head">
+          <span id="articleTitle">—</span>
+          <span class="stats" id="articleStats"></span>
+        </div>
+        <div class="article-body" id="articleBody"></div>
+      </div>
+    </section>
+
+    <!-- ===== 中间工具栏 ===== -->
+    <div class="toolbar">
+      <!-- 日常模式 -->
+      <div class="tb-left" id="tbNormal">
+        <select class="select" id="langSel" title="输出方式">
+          <option value="auto">自动检测</option>
+          <option value="zh-only">仅标注五笔</option>
+          <option value="zh2en">中文译英（实验）</option>
+        </select>
+        <button class="btn btn-sm" id="clearBtn" type="button">清空</button>
+      </div>
+
+      <!-- 练习模式 -->
+      <div class="tb-left" id="tbLearn" hidden>
+        <select class="select" id="articleSel" title="选择文章"></select>
+        <button class="btn btn-sm" id="restartBtn" type="button">重来</button>
+        <button class="btn" id="compareBtn" type="button" title="对错比对：错的字标红">答案对照模式</button>
+        <button class="btn btn-sm" id="hintBtn" type="button" title="打完一个字，在文章对应字上方显示五笔字母">逐字五笔提示</button>
+      </div>
+
+      <div class="tb-right">
+        <button class="btn-primary" id="modeBtn" type="button">
+          <span class="ico" id="modeBtnIcon">◎</span><span id="modeBtnText">练习 learn</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== 下方面板 ===== -->
+    <section class="panel panel-bottom">
+      <!-- 日常模式：输出 -->
+      <div class="pane" id="paneOutput">
+        <div class="out-head">
+          <span class="pane-title">输出</span>
+          <span class="out-tag" id="outTag"></span>
+        </div>
+        <div class="out-body" id="outBody"></div>
+        <div id="noticeWrap"></div>
+      </div>
+
+      <!-- 练习模式：输入 -->
+      <div class="pane" id="paneLearnInput" hidden>
+        <div class="pane-head">
+          <span class="pane-title">输入</span>
+          <span class="pane-tip">照着上面的文章打字，标点会自动跳过</span>
+        </div>
+        <textarea class="learn-input" id="learnInput" spellcheck="false"
+          placeholder="点这里开始打字：打完一个字，上面的文章里对应的字上方就会出现它的五笔字母……"></textarea>
+        <div class="progress-wrap">
+          <div class="progress-bar"><i id="progressFill"></i></div>
+          <span class="progress-num" id="progressNum">0 / 0</span>
+        </div>
+        <div id="learnNoticeWrap"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-foot">
+    离线可用 · 双击 <b>index.html</b> 即可运行　|　资源包在 <b>resources/</b> 下分类存放，可直接编辑或替换更新<br>
+    <kbd>Ctrl</kbd>+<kbd>Enter</kbd> 切换日常 / 练习　·　练习中点 <kbd>重来</kbd> 重新开始本篇文章
+  </footer>
+
+</div>
+
+<!-- ===== 资源包（顺序可调整，同类可叠加） ===== -->
+<script src="resources/wubi/wubi86.js"></script>
+<script src="resources/chinese/common1000.js"></script>
+<script src="resources/english/ecdict_en2cn.js"></script>
+<script src="resources/english/fix_en.js"></script>
+<script src="resources/english/ecdict_cn2en.js"></script>
+<script src="resources/articles/articles.js"></script>
+
+<!-- ===== 主程序 ===== -->
+<script src="assets/app.js"></script>
+</body>
+</html>
