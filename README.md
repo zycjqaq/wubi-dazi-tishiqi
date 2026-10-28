@@ -34,7 +34,7 @@
 ### 手机版（`phone/`）
 
 ```
-直接安装 phone/dist/wubi-hint.apk（Android 5.0+）
+直接安装 phone/dist/wubi-dazi-tishiqi.apk（Android 5.0+）
 ```
 
 源码在 `phone/`，用 `python build.py` 一条命令重新打包（不需要 Android Studio / Gradle）。
@@ -62,7 +62,7 @@
 │   ├── README.md              手机版详细说明（安装/打包/验收表/更新记录）
 │   ├── build.py               一键打包 APK
 │   ├── check_apk.py           打包后逐条核对 APK 内容
-│   ├── dist/wubi-hint.apk     成品
+│   ├── dist/wubi-dazi-tishiqi.apk     成品
 │   ├── www/                   网页部分（与 pc/ 基本一致 + 移动端增强）
 │   └── android/               原生壳（WebView + 一个 Activity + 7 个辅助类）
 │
