@@ -5,7 +5,7 @@ import zipfile
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-APK = r"E:\5bts deepseeklearn\phone\五笔打字提示器.apk"
+APK = r"E:\5bts deepseeklearn\phone\wubi-dazi-tishiqi.apk"
 
 EXPECT = [
     "AndroidManifest.xml",

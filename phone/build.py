@@ -18,7 +18,7 @@
     6. zipalign -f 4  对齐
     7. apksigner sign 签名（首次运行会自动生成 keystore）
 产物：
-    E:\\5bts deepseeklearn\\phone\\五笔打字提示器.apk
+    E:\\5bts deepseeklearn\\phone\\wubi-dazi-tishiqi.apk
 """
 
 import os
@@ -56,7 +56,7 @@ KEYSTORE = os.path.join(PHONE, "wubi-release.keystore")
 KS_PASS = "wubi123456"
 KS_ALIAS = "wubi"
 
-APK_NAME = "五笔打字提示器.apk"
+APK_NAME = "wubi-dazi-tishiqi.apk"
 OUT_APK = os.path.join(PHONE, APK_NAME)
 
 MIN_API = "21"
