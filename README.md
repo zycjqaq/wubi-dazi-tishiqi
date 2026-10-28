@@ -5,6 +5,11 @@
 
 纯前端实现，**完全离线可用**，双击 `index.html` 即可运行；另附一个 Android APK 版本（同一个网页 + WebView 壳）。
 
+| 想直接试 | 链接 |
+| --- | --- |
+| 在线使用（浏览器打开即用） | <https://zycjqaq.github.io/wubi-dazi-tishiqi/> |
+| 下载安卓 APK | <https://github.com/zycjqaq/wubi-dazi-tishiqi/releases/latest> |
+
 ---
 
 ## 特性
@@ -34,7 +39,7 @@
 ### 手机版（`phone/`）
 
 ```
-直接安装 phone/dist/wubi-dazi-tishiqi.apk（Android 5.0+）
+直接安装 phone/dist/wubi-dazi-tishiqi.apk，或从 Releases 下载最新版（Android 5.0+）
 ```
 
 源码在 `phone/`，用 `python build.py` 一条命令重新打包（不需要 Android Studio / Gradle）。
@@ -45,6 +50,7 @@
 
 ```
 .
+├── index.html                 在线试玩落地页（GitHub Pages 根目录）
 ├── pc/                        电脑版（双击即用）
 │   ├── index.html
 │   ├── README.md              电脑版详细说明（资源包格式写得很细）

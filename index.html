@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>五笔打字提示器</title>
+<meta name="description" content="汉字上方标注五笔字母，英文翻译成中文，常用千字十篇打字练习。纯前端离线可用。">
+<style>
+  :root {
+    --bg: #eef1f8; --card: #ffffff; --line: #dfe5f0;
+    --text: #1c2434; --muted: #6b7788; --accent: #2f6bff; --accent-deep: #1f52d0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 32px 20px;
+  }
+  .wrap { width: 100%; max-width: 620px; }
+  .head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .logo {
+    width: 52px; height: 52px; border-radius: 15px; background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 27px; font-weight: 700; box-shadow: 0 6px 16px rgba(47,107,255,.32);
+  }
+  h1 { margin: 0; font-size: 23px; letter-spacing: .5px; }
+  .sub { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 22px 22px 20px; box-shadow: 0 8px 26px rgba(28,36,52,.07); margin-bottom: 16px;
+  }
+  .card h2 { margin: 0 0 12px; font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: .4px; }
+  ul { margin: 0; padding-left: 20px; line-height: 1.95; font-size: 14px; }
+  li b { color: var(--accent-deep); }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    height: 50px; border-radius: 13px; text-decoration: none; font-size: 16px; font-weight: 600;
+    background: linear-gradient(180deg, #3d78ff, var(--accent-deep)); color: #fff;
+    box-shadow: 0 8px 20px rgba(47,107,255,.30); margin-bottom: 12px;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn.ghost {
+    background: #fff; color: var(--accent-deep); border: 1px solid #c8d6f7;
+    box-shadow: 0 4px 12px rgba(47,107,255,.10);
+  }
+  .meta { color: var(--muted); font-size: 12.5px; line-height: 1.9; }
+  .meta code {
+    font-family: Consolas, "Courier New", monospace; background: #f1f4fb;
+    border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; font-size: 12px;
+  }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 18px; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="logo">五</div>
+    <div>
+      <h1>五笔打字提示器</h1>
+      <p class="sub">汉字上方标五笔字母 · 英文译中文 · 常用千字十篇练习</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>两个形态</h2>
+    <a class="btn" href="pc/index.html">▶ 在线使用（电脑版网页）</a>
+    <a class="btn ghost" href="https://github.com/zycjqaq/wubi-dazi-tishiqi/releases/latest">⬇ 下载安卓 APK</a>
+    <div class="meta">
+      APK 约 1.63 MB，Android 5.0 以上，默认<b>完全离线</b>；自签名证书，首次安装需允许「安装未知来源应用」。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>能做什么</h2>
+    <ul>
+      <li>输入汉字 → 下方输出，每个字<b>上方标出五笔全码</b>（如 我 → TRNT）</li>
+      <li>输入英文 → 自动译成中文（离线词典 + 508 条短语修正表，可填密钥联网增强）</li>
+      <li>日文等其他语言 → 原样输出并提示「无法理解」</li>
+      <li>点「练习 learn」→ 上为十篇短文，下为输入框，逐字比对、错字标红</li>
+      <li>手机版另有侧边栏、夜间模式、每月联网额度上限</li>
+    </ul>
+  </div>
+
+  <footer>
+    纯前端实现，可完全离线运行 ·
+    <a href="https://github.com/zycjqaq/wubi-dazi-tishiqi">源码</a> ·
+    <a href="https://github.com/zycjqaq/wubi-dazi-tishiqi/blob/main/docs/dev-guide.pdf">开发文档</a>
+  </footer>
+</div>
+</body>
+</html>
