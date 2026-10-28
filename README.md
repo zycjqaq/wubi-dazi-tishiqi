@@ -64,8 +64,7 @@
 │   ├── check_apk.py           打包后逐条核对 APK 内容
 │   ├── dist/wubi-hint.apk     成品
 │   ├── www/                   网页部分（与 pc/ 基本一致 + 移动端增强）
-│   ├── android/               原生壳（WebView + 一个 Activity + 4 个工具类）
-│   └── screenshots/           验收截图
+│   └── android/               原生壳（WebView + 一个 Activity + 7 个辅助类）
 │
 └── docs/
     ├── dev-guide.pdf          开发流程与要点（9 页）
