@@ -1,0 +1,572 @@
+/* ===== 五笔打字提示器 · 手机版样式覆盖（在 app.css 之后加载） ===== */
+
+/* ---------- 1. 基础：安全区、禁双击缩放、禁长按选中 ---------- */
+html, body {
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  /* 刘海屏 / 挖孔屏安全区 */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+/* 输入框之外禁止长按弹出「选择/复制」，输入框内保留正常选择 */
+.app * { -webkit-user-select: none; user-select: none; }
+textarea, .out-body, .article-body { -webkit-user-select: text; user-select: text; }
+
+.app {
+  max-width: none;
+  padding: 12px 10px calc(18px + env(safe-area-inset-bottom));
+  min-height: 0;
+}
+
+/* ---------- 2. 顶栏：手机上收紧，只留标题 ---------- */
+.app-head { margin-bottom: 10px; gap: 8px; }
+.logo { width: 36px; height: 36px; border-radius: 11px; font-size: 20px; }
+.app-head h1 { font-size: 16px; letter-spacing: .3px; }
+.app-head .sub { font-size: 11px; margin-top: 2px; line-height: 1.5; }
+.pack-info { display: none; }
+
+/* ---------- 3. 面板 ---------- */
+.panel { border-radius: 15px; }
+.panel-top { min-height: 0; }
+.panel-bottom { min-height: 0; }
+
+.pane-head { padding: 9px 13px 0; min-height: 32px; }
+.pane-title { font-size: 11.5px; letter-spacing: 1.6px; }
+.pane-tip { font-size: 11px; }
+
+/* ---------- 4. 输入框 ---------- */
+.input-area {
+  min-height: 96px;
+  max-height: none;
+  padding: 8px 13px 12px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.learn-input {
+  min-height: 84px;
+  max-height: none;
+  padding: 8px 13px 12px;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* ---------- 5. 工具栏：按钮加大、允许换行 ---------- */
+.toolbar {
+  padding: 8px 2px;
+  gap: 7px;
+  align-items: stretch;
+}
+
+.tb-left, .tb-right { gap: 7px; flex-wrap: wrap; }
+.tb-right { width: 100%; justify-content: stretch; }
+
+.select {
+  padding: 8px 26px 8px 12px;
+  font-size: 13px;
+  min-height: 38px;
+}
+
+.btn {
+  padding: 8px 13px;
+  font-size: 12.5px;
+  min-height: 38px;
+}
+
+.btn-sm { padding: 7px 11px; font-size: 12px; }
+
+/* learn 按钮独占一行，手指好按 */
+.btn-primary {
+  width: 100%;
+  justify-content: center;
+  padding: 11px 16px;
+  font-size: 15px;
+  letter-spacing: .6px;
+  border-radius: 14px;
+}
+
+/* ---------- 6. 输出区：字格放大，字母清晰 ---------- */
+.out-head { padding: 9px 13px 0; }
+.out-tag { font-size: 10.5px; }
+
+.out-body {
+  padding: 6px 9px 14px;
+  /* 手机上输出区限高并内部滚动，保证下方内容/输入框始终能露出来 */
+  max-height: 34vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 90px;
+}
+
+.out-line { row-gap: 9px; }
+
+.cell { margin: 0 3.5px; }
+.cell .code { height: 13px; line-height: 13px; font-size: 10.5px; letter-spacing: 1.6px; text-indent: 1.6px; }
+.cell .ch { font-size: 25px; line-height: 1.3; min-width: 25px; }
+.cell-punct { margin: 0 1.5px; }
+.cell-punct .ch { font-size: 18px; }
+.cell-foreign .ch { font-size: 15px; padding: 1px 5px; }
+.cell-unknown .ch { font-size: 18px; padding: 1px 5px; }
+.cell-plain .ch { font-size: 17px; }
+.out-plain { font-size: 17px; line-height: 1.75; }
+
+.gap { width: 5px; flex: 0 0 5px; }
+
+.placeholder { padding: 18px 4px; font-size: 13px; }
+
+/* ---------- 7. 提示条 ---------- */
+.notice { margin: 8px 2px 0; padding: 8px 11px; font-size: 12px; line-height: 1.65; }
+
+/* ---------- 8. 练习：文章区 ---------- */
+.article-head { padding: 4px 13px 0; gap: 8px; }
+#articleTitle { font-size: 12.5px; }
+.stats { font-size: 10.5px; }
+
+.article-body {
+  padding: 6px 9px 12px;
+  /* 文章区限高、内部滚动：软键盘弹出时输入框仍能露在屏幕里 */
+  max-height: 38vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 88px;
+  row-gap: 8px;
+}
+
+.article-body .cell .ch { font-size: 22px; min-width: 22px; }
+.article-body .cell-punct .ch { font-size: 16px; }
+
+.progress-wrap { padding: 0 13px 12px; gap: 10px; }
+.progress-bar { height: 5px; }
+.progress-num { font-size: 10.5px; }
+
+/* ---------- 9. 页脚 ---------- */
+.app-foot { margin-top: 12px; font-size: 10.5px; line-height: 1.8; }
+.app-foot kbd { font-size: 10px; padding: 1px 4px; }
+
+/* ---------- 10. 自检输出 ---------- */
+#selftest { font-size: 10.5px; padding: 12px; margin: 12px 0; line-height: 1.5; }
+
+/* ---------- 11. 极窄屏（<=360dp）再收一档 ---------- */
+@media (max-width: 360px) {
+  .cell .ch { font-size: 23px; min-width: 23px; }
+  .cell .code { font-size: 9.5px; letter-spacing: 1.2px; }
+  .article-body .cell .ch { font-size: 20px; min-width: 20px; }
+  .input-area, .learn-input { font-size: 16px; }
+  .btn { font-size: 12.5px; padding: 9px 12px; }
+}
+
+/* ---------- 12. 矮屏（横屏或小屏手机）：文章区再压一档，保证输入框露出来 ---------- */
+@media (max-height: 720px) {
+  .app-head { margin-bottom: 8px; }
+  .app-head .sub { display: none; }
+  .article-body { max-height: 30vh; }
+  .out-body { max-height: 28vh; }
+  .input-area { min-height: 74px; }
+  .learn-input { min-height: 66px; }
+  .app-foot { display: none; }
+}
+
+@media (max-height: 560px) {
+  .article-body { max-height: 24vh; }
+  .out-body { max-height: 22vh; }
+  .toolbar { padding: 6px 2px; }
+}
+
+/* ---------- 13. 练习模式：工具条按钮紧凑，尽量一行放下 ---------- */
+#tbLearn .btn,
+#tbLearn .btn-sm { padding: 7px 10px; font-size: 12px; }
+#tbLearn .select { padding: 7px 24px 7px 10px; font-size: 12.5px; }
+
+/* ============================================================
+   14. 侧边栏（左侧抽屉）：左上角按钮 → 抽屉里点月亮切夜间模式
+   ============================================================ */
+
+/* 汉堡按钮：放在顶栏最左边 */
+.side-toggle {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .16s, border-color .16s;
+}
+
+.side-toggle i {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  opacity: .78;
+  transition: transform .18s, opacity .18s;
+}
+
+.side-toggle:active { background: var(--accent-soft); }
+.side-toggle[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.side-toggle[aria-expanded="true"] i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.side-toggle[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
+.side-toggle[aria-expanded="true"] i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* 遮罩 */
+.side-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 16, 28, .42);
+  z-index: 90;
+  opacity: 0;
+  transition: opacity .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.side-mask.show { opacity: 1; }
+
+/* 抽屉本体 */
+.side-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 76%;
+  max-width: 300px;
+  z-index: 91;
+  background: var(--card);
+  border-right: 1px solid var(--line);
+  box-shadow: 8px 0 28px rgba(16, 30, 60, .18);
+  padding: calc(18px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transform: translateX(-102%);
+  transition: transform .24s cubic-bezier(.32, .72, .28, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.side-bar.show { transform: translateX(0); }
+
+.side-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 2px 2px 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.side-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #4f83ff, #1e4fd8);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 14px rgba(47, 107, 255, .3);
+}
+
+.side-name { font-size: 14px; font-weight: 650; color: var(--text); letter-spacing: .3px; }
+.side-ver { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: var(--mono); }
+
+/* 月亮那一行：整行可点 */
+.side-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 13px 13px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .16s, border-color .16s, transform .1s;
+}
+
+.side-item:active { transform: scale(.985); background: var(--accent-soft); }
+.side-item[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+
+.side-ico {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+.side-ico svg { display: block; }
+.side-ico .ico-sun { display: none; }
+.side-item[aria-pressed="true"] .ico-moon { display: none; }
+.side-item[aria-pressed="true"] .ico-sun { display: block; }
+
+.side-label { flex: 1; font-weight: 550; letter-spacing: .3px; }
+
+/* 小开关 */
+.side-switch {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--line);
+  position: relative;
+  transition: background .2s;
+}
+
+.side-switch i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .28);
+  transition: transform .2s cubic-bezier(.32, .72, .28, 1);
+}
+
+.side-item[aria-pressed="true"] .side-switch { background: var(--accent); }
+.side-item[aria-pressed="true"] .side-switch i { transform: translateX(18px); }
+
+.side-tip {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.75;
+  color: var(--muted);
+  padding: 0 3px;
+}
+
+/* 只有最后一条提示吸到抽屉底部，其余紧跟上面的按钮 */
+.side-bar > .side-tip:last-child { margin-top: auto; }
+
+/* ============================================================
+   15. 夜间模式：html.dark 覆盖 app.css 里的浅色变量与硬编码颜色
+   ============================================================ */
+html.dark {
+  --bg: #0e1420;
+  --card: #17202e;
+  --line: #27323f;
+  --line-soft: #1d2733;
+  --text: #e6ecf5;
+  --muted: #8b98ab;
+  --accent: #5b8cff;
+  --accent-soft: #1b2b47;
+  --accent-deep: #93b4ff;
+  --ok: #35c07a;
+  --ok-soft: #14301f;
+  --warn: #e0a34a;
+  --warn-soft: #2e2413;
+  --bad: #f87171;
+  --bad-soft: #33191c;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
+  color-scheme: dark;
+}
+
+html.dark body {
+  background: radial-gradient(1200px 600px at 50% -10%, #16202f 0%, #111a26 45%, #0e1420 100%) fixed;
+  color: var(--text);
+}
+
+html.dark .pane-title { color: #9aa8bd; }
+html.dark .pack-info b { color: #c7d2e3; }
+
+html.dark .input-area::placeholder,
+html.dark .learn-input::placeholder { color: #56637a; }
+
+/* 下拉框：连自带的箭头图一起换成浅色 */
+html.dark .select {
+  background: #1b2534 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%238b98ab'/></svg>") no-repeat right 12px center;
+  color: #cfd8e6;
+  border-color: var(--line);
+}
+html.dark .select:hover { border-color: #38485c; }
+
+html.dark .btn {
+  background: #1b2534;
+  color: #cfd8e6;
+  border-color: var(--line);
+}
+html.dark .btn:hover { background: #202c3d; border-color: #38485c; color: var(--accent-deep); }
+html.dark .btn-on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-deep); }
+
+html.dark .out-tag { color: #93a1b6; }
+html.dark .cell-punct .ch { color: #8b98ab; }
+html.dark .cell-nocode .ch { color: #8b98ab; }
+html.dark .cell-plain .ch,
+html.dark .out-plain { color: #dbe4f0; }
+html.dark .placeholder { color: #56637a; }
+
+html.dark .notice { border-color: #4a3a1c; color: #e8bd7c; }
+html.dark .notice-bad { border-color: #4d2327; color: #f7a3a3; }
+html.dark .notice-ok { border-color: #1c4430; color: #7ddba6; }
+
+html.dark #articleTitle { color: #dbe4f0; }
+html.dark .article-body .cell .ch { color: #9aa8bd; }
+html.dark .article-body .cell-punct .ch { color: #7b8a9e; }
+html.dark .article-body .cell-correct .code { color: #55a87c; }
+html.dark .article-body .cell-auto .ch { color: #7b8a9e; }
+
+html.dark .progress-bar { background: #1f2a38; }
+
+html.dark .app-foot { color: #7b8a9e; }
+html.dark .app-foot kbd { background: #1b2534; color: #cfd8e6; border-color: var(--line); }
+
+html.dark #errorBox {
+  background: #33191c !important;
+  border-color: #4d2327 !important;
+  color: #f7a3a3 !important;
+}
+
+/* 夜间模式下抽屉阴影更沉 */
+html.dark .side-bar { box-shadow: 8px 0 30px rgba(0, 0, 0, .55); }
+html.dark .side-mask { background: rgba(0, 0, 0, .55); }
+html.dark .side-switch i { background: #e6ecf5; }
+
+/* 顶栏多了汉堡按钮，手机上让 brand 占满剩余宽度 */
+.app-head .brand { flex: 1 1 auto; min-width: 0; }
+
+
+/* =========================================================
+   16. 联网翻译开关 + 翻译设置面板（v1.3）
+   ========================================================= */
+.side-arrow { margin-left: auto; color: var(--muted); font-size: 18px; line-height: 1; }
+.side-item.side-set { margin-top: 4px; }
+.side-net .side-ico svg { color: var(--accent); }
+.side-set .side-ico svg { color: var(--muted); }
+html.dark .side-set .side-ico svg { color: #8b98ab; }
+
+/* ---- 设置面板：从底部升起的卡片 ---- */
+.sheet-mask {
+  position: fixed; inset: 0; z-index: 95;
+  background: rgba(10, 16, 28, .46);
+  opacity: 0; transition: opacity .2s ease;
+}
+.sheet-mask.show { opacity: 1; }
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 96;
+  max-height: 88vh; overflow-y: auto;
+  background: var(--card);
+  border-radius: 18px 18px 0 0;
+  padding: 16px 16px calc(18px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 34px rgba(12, 22, 44, .22);
+  transform: translateY(102%);
+  transition: transform .26s cubic-bezier(.32, .72, .28, 1);
+}
+.sheet.show { transform: translateY(0); }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.sheet-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.sheet-x {
+  border: 0; background: transparent; color: var(--muted);
+  font-size: 16px; line-height: 1; padding: 6px 8px; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sheet-desc { margin: 0 0 14px; font-size: 12.5px; line-height: 1.7; color: var(--muted); }
+.sheet-desc b { color: var(--text); font-weight: 600; }
+
+.field { display: block; margin-bottom: 12px; }
+.field > span {
+  display: block; font-size: 12px; color: var(--muted);
+  margin-bottom: 6px; letter-spacing: .3px;
+}
+.field input {
+  width: 100%; box-sizing: border-box;
+  padding: 11px 12px; font-size: 14px;
+  color: var(--text); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 11px;
+  font-family: var(--mono);
+  -webkit-appearance: none; appearance: none;
+}
+.field input:focus { outline: none; border-color: var(--accent); background: var(--card); }
+
+.sheet-row { display: flex; gap: 10px; margin-top: 4px; }
+.sheet-row .btn-wide { flex: 1 1 auto; }
+.sheet-row .btn { flex: 0 0 auto; padding: 0 18px; height: 44px; }
+
+.sheet-log {
+  margin-top: 10px; min-height: 18px;
+  font-size: 12.5px; line-height: 1.6; color: var(--muted);
+  word-break: break-all;
+}
+.sheet-log-ok { color: var(--ok); }
+.sheet-log-bad { color: var(--bad); }
+
+.sheet-help { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+.sheet-help summary {
+  font-size: 12.5px; color: var(--accent); cursor: pointer;
+  list-style: none; -webkit-tap-highlight-color: transparent;
+}
+.sheet-help summary::-webkit-details-marker { display: none; }
+.sheet-help summary::before { content: '▸ '; }
+.sheet-help[open] summary::before { content: '▾ '; }
+.sheet-help ol { margin: 10px 0 0; padding-left: 20px; }
+.sheet-help li { font-size: 12.5px; line-height: 1.85; color: var(--muted); }
+.sheet-help li b { color: var(--text); font-weight: 600; }
+.sheet-note { margin: 10px 0 0; font-size: 11.5px; line-height: 1.7; color: var(--muted); }
+
+/* ---- 联网翻译回来的中文：码用蓝色，字稍作区分 ---- */
+.cell-net .code { color: #2f8f6b; }
+html.dark .cell-net .code { color: #5fd39b; }
+
+html.dark .sheet { background: #17202e; box-shadow: 0 -8px 34px rgba(0, 0, 0, .6); }
+html.dark .sheet-title { color: var(--text); }
+html.dark .field input { background: #1b2534; border-color: var(--line); color: var(--text); }
+html.dark .field input:focus { background: #1f2a3a; }
+html.dark .sheet-mask { background: rgba(0, 0, 0, .6); }
+/* ===== 17. 密钥显示按钮 / 每月额度统计 ===== */
+.field > .field-wrap {
+  display: block;
+  position: relative;
+  margin-bottom: 0;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: normal;
+}
+.field-wrap input { padding-right: 44px; }
+.field-eye {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+.field-eye:active { background: var(--accent-soft); }
+.sheet-usage {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  letter-spacing: .2px;
+  color: var(--muted);
+}
+.sheet-usage-warn { color: var(--warn); }
+.sheet-usage-full { color: var(--bad); font-weight: 600; }
+html.dark .field-eye:active { background: #223050; }
