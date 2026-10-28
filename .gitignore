@@ -1,0 +1,20 @@
+# 打包中间产物
+phone/build/
+*.idsig
+
+# 签名证书（自行生成，不提交）
+phone/wubi-release.keystore
+*.keystore
+*.jks
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# 构建脚本的本地临时文件
+*.pyc
+__pycache__/
